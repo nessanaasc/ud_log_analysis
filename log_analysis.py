@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env
 # log_analysis.py - code for a log analysis project
 
 import psycopg2
@@ -16,8 +16,8 @@ def getPopularArticles():
     """Top three most popular articles"""
     db = connect()
     c = db.cursor()
-    query1 = """select articles.title, count(*) as views from articles, log
-                    where articles.slug = substring(log.path, 10,30)
+    query1 = """select articles.title, count(*) as views from articles inner join log
+                    on log.path = CONCAT('/article/', articles.slug)
                     group by articles.title
                     order by views desc limit 3;"""
     c.execute(query1)
@@ -32,9 +32,9 @@ def getPopularAuthors():
     """Authors of most popular articles of all time"""
     db = connect()
     c = db.cursor()
-    query2 = """select authors.name, count(*) as views from authors, articles, log
-                    where authors.id = articles.author and
-                    articles.slug = substring(log.path, 10,30)
+    query2 = """select authors.name, count(*) as views from articles inner join authors
+                    on articles.author = authors.id inner join log
+                    on log.path = CONCAT('/article/', articles.slug)
                     group by authors.name
                     order by views desc;"""
     c.execute(query2)
@@ -63,10 +63,14 @@ def getErrors():
         plot = '{date}: {error_rate} %.'.format(date=row[0], error_rate=row[1])
         print(plot)
 
-print('')
-getPopularArticles()
-print('')
-getPopularAuthors()
-print('')
-getErrors()
-print('')
+
+if __name__ == '__main__':
+    print('')
+    getPopularArticles()
+    print('')
+    getPopularAuthors()
+    print('')
+    getErrors()
+    print('')
+else:
+    print 'Importing file...'
