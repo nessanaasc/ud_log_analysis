@@ -12,7 +12,7 @@ For run the project you will need to download the following files:
 
 ## Softwares Requirements
 You also will need the following softwares in your computer to run the application:
-1. Python 3 - For download and install: https://www.python.org/downloads/
+1. Python 2.7 - For download and install: https://www.python.org/downloads/
 2. Git Bash - For all commands line. You will need have Git install. Download in https://git-scm.com/downloads
 3. Virtualbox 5.1.38 e Vagrant 2.2.4 - If you have a Mac or Windows system, you will need have a Virtual Machine to run a Linux System. This project was created using a Virtual Box (You don't need a extension package or SDK) and Vagrant. For download e install acess: https://www.virtualbox.org/wiki/Downloads and https://www.vagrantup.com/downloads.html.
 For check the Vagrant install, you can run `vagrant --version` in your prompt
