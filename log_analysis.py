@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # log_analysis.py - code for a log analysis project
 
 import psycopg2
