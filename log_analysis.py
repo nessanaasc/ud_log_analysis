@@ -16,8 +16,8 @@ def getPopularArticles():
     """Top three most popular articles"""
     db = connect()
     c = db.cursor()
-    query1 = """select articles.title, count(*) as views from articles inner join log
-                    on log.path = CONCAT('/article/', articles.slug)
+    query1 = """select articles.title, count(*) as views from articles inner
+                    join log on log.path = CONCAT('/article/', articles.slug)
                     group by articles.title
                     order by views desc limit 3;"""
     c.execute(query1)
@@ -32,8 +32,8 @@ def getPopularAuthors():
     """Authors of most popular articles of all time"""
     db = connect()
     c = db.cursor()
-    query2 = """select authors.name, count(*) as views from articles inner join authors
-                    on articles.author = authors.id inner join log
+    query2 = """select authors.name, count(*) as views from articles inner join
+                    authors on articles.author = authors.id inner join log
                     on log.path = CONCAT('/article/', articles.slug)
                     group by authors.name
                     order by views desc;"""
